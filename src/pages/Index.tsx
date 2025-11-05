@@ -4,10 +4,14 @@ import StatsCard from "@/components/StatsCard";
 import QuickActions from "@/components/QuickActions";
 import RecentActivity from "@/components/RecentActivity";
 
-const Index = () => {
+interface IndexProps {
+  onLogout: () => void;
+}
+
+const Index = ({ onLogout }: IndexProps) => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onLogout={onLogout} />
       
       {/* Hero Section */}
       <div className="bg-gradient-hero text-primary-foreground">
