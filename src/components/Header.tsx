@@ -1,5 +1,6 @@
 import { BookOpen, Users, GraduationCap, BarChart3, UserSquare, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -140,10 +141,12 @@ const Header = ({ onLogout }: HeaderProps) => {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="ghost" size="sm" className="gap-2">
-            <BarChart3 className="h-4 w-4" />
-            <span>Reports</span>
-          </Button>
+          <Link to="/reports">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <BarChart3 className="h-4 w-4" />
+              <span>Reports</span>
+            </Button>
+          </Link>
         </nav>
         
         <Button 

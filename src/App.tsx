@@ -7,6 +7,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Reports from "./pages/Reports";
+import ReportCards from "./pages/ReportCards";
+import ReportCardDetail from "./pages/ReportCardDetail";
+import Transcripts from "./pages/Transcripts";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +56,46 @@ const App = () => {
               element={
                 isAuthenticated ? (
                   <Index onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                isAuthenticated ? (
+                  <Reports onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/reports/report-cards"
+              element={
+                isAuthenticated ? (
+                  <ReportCards onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/reports/report-cards/:id"
+              element={
+                isAuthenticated ? (
+                  <ReportCardDetail onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/reports/transcripts"
+              element={
+                isAuthenticated ? (
+                  <Transcripts onLogout={handleLogout} />
                 ) : (
                   <Navigate to="/login" replace />
                 )
