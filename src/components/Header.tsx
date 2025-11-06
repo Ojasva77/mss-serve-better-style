@@ -70,7 +70,11 @@ const teachersData: Teacher[] = [
   },
 ];
 
-const Header = () => {
+interface HeaderProps {
+  onLogout: () => void;
+}
+
+const Header = ({ onLogout }: HeaderProps) => {
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -142,8 +146,11 @@ const Header = () => {
           </Button>
         </nav>
         
-        <Button className="bg-gradient-accent border-0">
-          <span className="text-accent-foreground font-medium">Dashboard</span>
+        <Button 
+          className="bg-gradient-accent border-0"
+          onClick={onLogout}
+        >
+          <span className="text-accent-foreground font-medium">Logout</span>
         </Button>
       </div>
     </header>
