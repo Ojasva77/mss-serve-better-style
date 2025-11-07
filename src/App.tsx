@@ -15,6 +15,7 @@ import Students from "./pages/Students";
 import CXC from "./pages/CXC";
 import CXCRegistration from "./pages/CXCRegistration";
 import Recommendations from "./pages/Recommendations";
+import Courses from "./pages/Courses";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,16 @@ const App = () => {
               element={
                 isAuthenticated ? (
                   <Students onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/courses"
+              element={
+                isAuthenticated ? (
+                  <Courses onLogout={handleLogout} />
                 ) : (
                   <Navigate to="/login" replace />
                 )

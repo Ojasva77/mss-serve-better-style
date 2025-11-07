@@ -112,10 +112,12 @@ const Header = ({ onLogout }: HeaderProps) => {
         </div>
         
         <nav className="hidden md:flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="gap-2">
-            <BookOpen className="h-4 w-4" />
-            <span>Courses</span>
-          </Button>
+          <Link to="/courses">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <BookOpen className="h-4 w-4" />
+              <span>Courses</span>
+            </Button>
+          </Link>
           <Link to="/students">
             <Button variant="ghost" size="sm" className="gap-2">
               <Users className="h-4 w-4" />
@@ -184,10 +186,12 @@ const Header = ({ onLogout }: HeaderProps) => {
                     <span>Dashboard</span>
                   </Button>
                 </Link>
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  <BookOpen className="h-4 w-4" />
-                  <span>Courses</span>
-                </Button>
+                <Link to="/courses" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start gap-2">
+                    <BookOpen className="h-4 w-4" />
+                    <span>Courses</span>
+                  </Button>
+                </Link>
                 <Link to="/students" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start gap-2">
                     <Users className="h-4 w-4" />
