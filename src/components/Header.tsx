@@ -1,4 +1,4 @@
-import { BookOpen, Users, GraduationCap, BarChart3, UserSquare, ChevronDown, Menu } from "lucide-react";
+import { BookOpen, Users, GraduationCap, BarChart3, UserSquare, ChevronDown, Menu, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -157,6 +157,12 @@ const Header = ({ onLogout }: HeaderProps) => {
               <span>Reports</span>
             </Button>
           </Link>
+          <Link to="/cxc">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <ClipboardCheck className="h-4 w-4" />
+              <span>CXC</span>
+            </Button>
+          </Link>
         </nav>
 
         {/* Mobile Menu */}
@@ -225,6 +231,13 @@ const Header = ({ onLogout }: HeaderProps) => {
                   <Button variant="ghost" className="w-full justify-start gap-2">
                     <BarChart3 className="h-4 w-4" />
                     <span>Reports</span>
+                  </Button>
+                </Link>
+
+                <Link to="/cxc" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start gap-2">
+                    <ClipboardCheck className="h-4 w-4" />
+                    <span>CXC</span>
                   </Button>
                 </Link>
 

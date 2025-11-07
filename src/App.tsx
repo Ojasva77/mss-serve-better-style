@@ -12,6 +12,9 @@ import ReportCards from "./pages/ReportCards";
 import ReportCardDetail from "./pages/ReportCardDetail";
 import Transcripts from "./pages/Transcripts";
 import Students from "./pages/Students";
+import CXC from "./pages/CXC";
+import CXCRegistration from "./pages/CXCRegistration";
+import Recommendations from "./pages/Recommendations";
 
 const queryClient = new QueryClient();
 
@@ -107,6 +110,36 @@ const App = () => {
               element={
                 isAuthenticated ? (
                   <Transcripts onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/cxc"
+              element={
+                isAuthenticated ? (
+                  <CXC onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/cxc/registration"
+              element={
+                isAuthenticated ? (
+                  <CXCRegistration onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/cxc/recommendations"
+              element={
+                isAuthenticated ? (
+                  <Recommendations onLogout={handleLogout} />
                 ) : (
                   <Navigate to="/login" replace />
                 )
