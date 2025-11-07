@@ -11,6 +11,7 @@ import Reports from "./pages/Reports";
 import ReportCards from "./pages/ReportCards";
 import ReportCardDetail from "./pages/ReportCardDetail";
 import Transcripts from "./pages/Transcripts";
+import Students from "./pages/Students";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,16 @@ const App = () => {
               element={
                 isAuthenticated ? (
                   <Index onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+            <Route
+              path="/students"
+              element={
+                isAuthenticated ? (
+                  <Students onLogout={handleLogout} />
                 ) : (
                   <Navigate to="/login" replace />
                 )

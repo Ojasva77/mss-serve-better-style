@@ -116,10 +116,12 @@ const Header = ({ onLogout }: HeaderProps) => {
             <BookOpen className="h-4 w-4" />
             <span>Courses</span>
           </Button>
-          <Button variant="ghost" size="sm" className="gap-2">
-            <Users className="h-4 w-4" />
-            <span>Students</span>
-          </Button>
+          <Link to="/students">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <Users className="h-4 w-4" />
+              <span>Students</span>
+            </Button>
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="gap-2">
@@ -180,10 +182,12 @@ const Header = ({ onLogout }: HeaderProps) => {
                   <BookOpen className="h-4 w-4" />
                   <span>Courses</span>
                 </Button>
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  <Users className="h-4 w-4" />
-                  <span>Students</span>
-                </Button>
+                <Link to="/students" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start gap-2">
+                    <Users className="h-4 w-4" />
+                    <span>Students</span>
+                  </Button>
+                </Link>
                 
                 {/* Teachers Submenu */}
                 <div className="space-y-2">
