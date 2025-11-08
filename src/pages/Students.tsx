@@ -117,10 +117,16 @@ const Students = ({ onLogout }: StudentsProps) => {
         onOpenChange={setIsProfileOpen}
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-        <div className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-2">Students</h1>
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        </div>
+        
+        <div className="container mx-auto px-4 py-8 relative z-10">
+          <div className="mb-8 animate-fade-in-up">
+            <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">Students</h1>
             <p className="text-muted-foreground">View and manage student information</p>
           </div>
 
@@ -128,9 +134,9 @@ const Students = ({ onLogout }: StudentsProps) => {
             {Object.entries(studentsByGrade)
               .sort(([a], [b]) => Number(a) - Number(b))
               .map(([grade, students]) => (
-                <Card key={grade}>
+                <Card key={grade} className="glass-card shadow-elegant hover-lift animate-fade-in-up" style={{ animationDelay: `${Number(grade) * 0.1}s` }}>
                   <CardHeader>
-                    <CardTitle>Grade {grade}</CardTitle>
+                    <CardTitle className="text-2xl">Grade {grade}</CardTitle>
                     <CardDescription>{students.length} students</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -139,7 +145,7 @@ const Students = ({ onLogout }: StudentsProps) => {
                         <Button
                           key={student.id}
                           variant="outline"
-                          className="h-auto p-4 justify-start"
+                          className="h-auto p-4 justify-start hover:shadow-glow transition-bounce hover:scale-105"
                           onClick={() => handleStudentClick(student)}
                         >
                           <div className="flex items-center gap-3 w-full">

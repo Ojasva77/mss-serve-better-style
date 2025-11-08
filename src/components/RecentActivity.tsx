@@ -38,7 +38,7 @@ const RecentActivity = () => {
   ];
 
   return (
-    <Card className="shadow-card border-border/50">
+    <Card className="glass-card shadow-elegant border-border/50">
       <CardHeader>
         <CardTitle className="text-xl">Recent Activity</CardTitle>
       </CardHeader>

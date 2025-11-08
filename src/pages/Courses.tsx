@@ -221,12 +221,18 @@ const Courses = ({ onLogout }: CoursesProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+      </div>
+
       <Header onLogout={onLogout} />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Courses & Lesson Plans</h1>
+      <main className="container mx-auto px-4 py-8 relative z-10">
+        <div className="mb-8 animate-fade-in-up">
+          <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">Courses & Lesson Plans</h1>
           <p className="text-muted-foreground">
             Resources and lesson plans to help new teachers deliver effective instruction
           </p>
@@ -237,7 +243,8 @@ const Courses = ({ onLogout }: CoursesProps) => {
             {courses.map((course) => (
               <Card 
                 key={course.id} 
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+                className="glass-card shadow-elegant cursor-pointer hover-lift transition-bounce animate-fade-in-up"
+                style={{ animationDelay: `${courses.indexOf(course) * 0.1}s` }}
                 onClick={() => setSelectedCourse(course)}
               >
                 <CardHeader>
@@ -262,13 +269,13 @@ const Courses = ({ onLogout }: CoursesProps) => {
           <div>
             <Button 
               variant="outline" 
-              className="mb-6"
+              className="mb-6 hover:shadow-md transition-smooth"
               onClick={() => setSelectedCourse(null)}
             >
               ← Back to Courses
             </Button>
 
-            <Card>
+            <Card className="glass-card shadow-elegant animate-fade-in-up">
               <CardHeader>
                 <div className="flex items-center gap-2 mb-2">
                   <BookOpen className="h-5 w-5 text-primary" />

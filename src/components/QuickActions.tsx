@@ -11,7 +11,7 @@ const QuickActions = () => {
   ];
 
   return (
-    <Card className="shadow-card border-border/50">
+    <Card className="glass-card shadow-elegant border-border/50">
       <CardHeader>
         <CardTitle className="text-xl">Quick Actions</CardTitle>
       </CardHeader>
@@ -20,7 +20,7 @@ const QuickActions = () => {
           <Button
             key={action.label}
             variant={action.variant}
-            className="h-auto flex-col gap-2 py-4"
+            className="h-auto flex-col gap-2 py-4 transition-bounce hover:shadow-md"
           >
             <action.icon className="h-5 w-5" />
             <span className="text-sm font-medium">{action.label}</span>

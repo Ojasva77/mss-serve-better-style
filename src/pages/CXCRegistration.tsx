@@ -54,23 +54,29 @@ const CXCRegistration = ({ onLogout }: CXCRegistrationProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      </div>
+
       <Header onLogout={onLogout} />
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-6">
+      <main className="container mx-auto px-4 py-8 relative z-10">
+        <div className="mb-6 animate-fade-in-up">
           <Link to="/cxc">
-            <Button variant="ghost" className="gap-2 mb-4">
+            <Button variant="ghost" className="gap-2 mb-4 hover:shadow-md transition-smooth">
               <ArrowLeft className="h-4 w-4" />
               Back to CXC
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-foreground mb-2">CXC Registration</h1>
+          <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">CXC Registration</h1>
           <p className="text-muted-foreground">
             Register students for CXC examinations
           </p>
         </div>
 
-        <Card className="shadow-card">
+        <Card className="glass-card shadow-elegant animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
           <CardHeader>
             <CardTitle>Student Registration Form</CardTitle>
             <CardDescription>
@@ -133,11 +139,11 @@ const CXCRegistration = ({ onLogout }: CXCRegistrationProps) => {
               <div className="pt-4 border-t border-border">
                 <Button 
                   type="submit" 
-                  className="w-full md:w-auto bg-gradient-primary border-0 gap-2"
+                  className="w-full md:w-auto bg-gradient-primary border-0 gap-2 shadow-md hover:shadow-glow transition-bounce"
                   disabled={!selectedStudent || !examLevel || selectedSubjects.length === 0}
                 >
                   <Save className="h-4 w-4" />
-                  <span className="text-primary-foreground">Submit Registration</span>
+                  <span className="text-primary-foreground font-semibold">Submit Registration</span>
                 </Button>
               </div>
             </form>

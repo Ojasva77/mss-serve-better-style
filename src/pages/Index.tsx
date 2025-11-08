@@ -10,14 +10,24 @@ interface IndexProps {
 
 const Index = ({ onLogout }: IndexProps) => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      </div>
+
       <Header onLogout={onLogout} />
       
       {/* Hero Section */}
-      <div className="bg-gradient-hero text-primary-foreground">
-        <div className="container px-4 md:px-6 py-16 md:py-20">
+      <div className="bg-gradient-hero text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-foreground/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-accent-foreground/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        </div>
+        <div className="container px-4 md:px-6 py-16 md:py-20 relative z-10">
           <div className="max-w-3xl animate-fade-in-up">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
               Micoud Secondary School
             </h2>
             <p className="text-xl md:text-2xl mb-2 text-primary-foreground/90">
@@ -31,7 +41,7 @@ const Index = ({ onLogout }: IndexProps) => {
       </div>
 
       {/* Main Content */}
-      <main className="container px-4 md:px-6 py-8 space-y-8">
+      <main className="container px-4 md:px-6 py-8 space-y-8 relative z-10">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           <StatsCard

@@ -82,24 +82,30 @@ const Recommendations = ({ onLogout }: RecommendationsProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+      </div>
+
       <Header onLogout={onLogout} />
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-6">
+      <main className="container mx-auto px-4 py-8 relative z-10">
+        <div className="mb-6 animate-fade-in-up">
           <Link to="/cxc">
-            <Button variant="ghost" className="gap-2 mb-4">
+            <Button variant="ghost" className="gap-2 mb-4 hover:shadow-md transition-smooth">
               <ArrowLeft className="h-4 w-4" />
               Back to CXC
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-foreground mb-2">CXC Recommendations</h1>
+          <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">CXC Recommendations</h1>
           <p className="text-muted-foreground">
             Submit teacher recommendations for student CXC examinations
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
-          <Card className="shadow-card">
+          <Card className="glass-card shadow-elegant animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <CardHeader>
               <CardTitle>Submit New Recommendation</CardTitle>
               <CardDescription>
@@ -167,17 +173,17 @@ const Recommendations = ({ onLogout }: RecommendationsProps) => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-accent border-0 gap-2"
+                  className="w-full bg-gradient-accent border-0 gap-2 shadow-md hover:shadow-glow transition-bounce"
                   disabled={!selectedStudent || !selectedSubject || !recommended || !comments}
                 >
                   <Save className="h-4 w-4" />
-                  <span className="text-accent-foreground">Submit Recommendation</span>
+                  <span className="text-accent-foreground font-semibold">Submit Recommendation</span>
                 </Button>
               </form>
             </CardContent>
           </Card>
 
-          <Card className="shadow-card">
+          <Card className="glass-card shadow-elegant animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <CardHeader>
               <CardTitle>Previous Recommendations</CardTitle>
               <CardDescription>
@@ -221,7 +227,7 @@ const Recommendations = ({ onLogout }: RecommendationsProps) => {
           </Card>
         </div>
 
-        <Card className="shadow-card">
+        <Card className="glass-card shadow-elegant animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <CardHeader>
             <CardTitle>Detailed Recommendation History</CardTitle>
           </CardHeader>
