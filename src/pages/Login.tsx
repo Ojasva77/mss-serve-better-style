@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import mssLogo from "@/assets/mss-logo.jpg";
 
 interface LoginProps {
   onLogin: () => void;
@@ -35,23 +35,27 @@ const Login = ({ onLogin }: LoginProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-hero p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-stone-50 via-white to-stone-100 p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-stone-200/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-stone-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
       </div>
 
-      <Card className="w-full max-w-md glass-card shadow-elegant animate-fade-in-up relative z-10">
+      <Card className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-2xl border-stone-200 animate-fade-in-up relative z-10">
         <CardHeader className="space-y-6 text-center pb-8">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-primary shadow-glow animate-float">
-            <GraduationCap className="h-12 w-12 text-primary-foreground" />
+          <div className="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-white shadow-xl animate-float p-2">
+            <img 
+              src={mssLogo} 
+              alt="Micoud Secondary School Logo" 
+              className="h-full w-full object-contain"
+            />
           </div>
           <div className="space-y-2">
-            <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <CardTitle className="text-3xl font-bold text-stone-800">
               Micoud Secondary School
             </CardTitle>
-            <CardDescription className="text-base text-muted-foreground">
+            <CardDescription className="text-base text-stone-600">
               Learn well to serve better
             </CardDescription>
           </div>
@@ -59,22 +63,22 @@ const Login = ({ onLogin }: LoginProps) => {
         <CardContent className="pb-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+              <Label htmlFor="password" className="text-sm font-medium text-stone-700">Password</Label>
               <Input
                 id="password"
                 type="password"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-11 transition-smooth focus:shadow-glow"
+                className="h-11 border-stone-300 bg-white focus:border-stone-500 focus:ring-stone-500"
                 required
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full h-11 bg-gradient-accent border-0 shadow-md hover:shadow-glow transition-bounce"
+              className="w-full h-11 bg-stone-700 hover:bg-stone-800 text-white shadow-md hover:shadow-lg transition-all duration-200"
             >
-              <span className="text-accent-foreground font-semibold">Sign In</span>
+              <span className="font-semibold">Sign In</span>
             </Button>
           </form>
         </CardContent>
