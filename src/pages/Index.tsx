@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import schoolBanner from "@/assets/school-banner.jpg";
 
 interface Student {
   id: string;
@@ -88,27 +89,31 @@ const Index = ({ onLogout }: IndexProps) => {
       <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-20 right-1/4 w-96 h-96 bg-stone-200/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-stone-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
       </div>
 
       <Header onLogout={onLogout} />
       
-      {/* Hero Section */}
-      <div className="bg-gradient-hero text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-foreground/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-accent-foreground/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-        </div>
+      {/* Hero Section with School Photo */}
+      <div className="relative overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ 
+            backgroundImage: `url(${schoolBanner})`,
+            filter: 'brightness(0.4)'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-800/70 to-stone-900/80" />
         <div className="container px-4 md:px-6 py-16 md:py-20 relative z-10">
           <div className="max-w-3xl animate-fade-in-up">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg text-white">
               Micoud Secondary School
             </h2>
-            <p className="text-xl md:text-2xl mb-2 text-primary-foreground/90">
+            <p className="text-xl md:text-2xl mb-2 text-stone-100">
               Learn well to serve better
             </p>
-            <p className="text-base text-primary-foreground/80 max-w-2xl">
+            <p className="text-base text-stone-200 max-w-2xl">
               Comprehensive school management system for tracking students, courses, grades, and academic performance.
             </p>
           </div>

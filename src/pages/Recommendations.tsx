@@ -85,8 +85,8 @@ const Recommendations = ({ onLogout }: RecommendationsProps) => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/4 right-1/3 w-96 h-96 bg-stone-200/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-stone-300/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
       </div>
 
       <Header onLogout={onLogout} />
@@ -98,7 +98,7 @@ const Recommendations = ({ onLogout }: RecommendationsProps) => {
               Back to CXC
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">CXC Recommendations</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">CXC Recommendations</h1>
           <p className="text-muted-foreground">
             Submit teacher recommendations for student CXC examinations
           </p>
