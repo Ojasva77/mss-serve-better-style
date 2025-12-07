@@ -1,4 +1,4 @@
-import { Users, BookOpen, Award, TrendingUp, ChevronDown } from "lucide-react";
+import { Users, BookOpen, Award, TrendingUp, ChevronDown, UserCheck, UserX } from "lucide-react";
 import Header from "@/components/Header";
 import StatsCard from "@/components/StatsCard";
 import QuickActions from "@/components/QuickActions";
@@ -77,6 +77,54 @@ const Index = ({ onLogout }: IndexProps) => {
   ];
 
   const totalStudents = Object.values(studentsByForm).reduce((sum, students) => sum + students.length, 0);
+
+  // Attendance data by form and class
+  const attendanceByForm: Record<string, { class: string; subject: string; present: string[]; absent: string[] }[]> = {
+    "Form 1": [
+      { class: "1A", subject: "Mathematics", present: ["Emily Anderson", "Marcus Thompson"], absent: ["Sophia Rodriguez"] },
+      { class: "1A", subject: "English A", present: ["Emily Anderson", "Sophia Rodriguez"], absent: ["Marcus Thompson"] },
+      { class: "1B", subject: "Integrated Science", present: ["Emily Anderson", "Marcus Thompson", "Sophia Rodriguez"], absent: [] },
+    ],
+    "Form 2": [
+      { class: "2A", subject: "Mathematics", present: ["James Mitchell"], absent: ["Olivia Johnson"] },
+      { class: "2A", subject: "Social Studies", present: ["James Mitchell", "Olivia Johnson"], absent: [] },
+      { class: "2B", subject: "Spanish", present: ["Olivia Johnson"], absent: ["James Mitchell"] },
+    ],
+    "Form 3": [
+      { class: "3A", subject: "Information Technology", present: ["Daniel Williams", "Ava Martinez"], absent: [] },
+      { class: "3A", subject: "Principles of Business", present: ["Daniel Williams"], absent: ["Ava Martinez"] },
+      { class: "3B", subject: "English B", present: ["Ava Martinez"], absent: ["Daniel Williams"] },
+    ],
+    "Form 4": [
+      { class: "4A", subject: "Principles of Accounts", present: ["Ethan Brown", "Isabella Davis"], absent: [] },
+      { class: "4A", subject: "Mathematics", present: ["Ethan Brown"], absent: ["Isabella Davis"] },
+      { class: "4B", subject: "English A", present: ["Isabella Davis"], absent: ["Ethan Brown"] },
+    ],
+    "Form 5": [
+      { class: "5A", subject: "Mathematics", present: ["Liam Garcia", "Mia Wilson"], absent: [] },
+      { class: "5A", subject: "English A", present: ["Liam Garcia"], absent: ["Mia Wilson"] },
+      { class: "5B", subject: "Information Technology", present: ["Mia Wilson"], absent: ["Liam Garcia"] },
+    ],
+  };
+
+  const [openAttendance, setOpenAttendance] = useState(false);
+  const [openAttendanceForms, setOpenAttendanceForms] = useState<Record<string, boolean>>({});
+
+  const toggleAttendanceForm = (formName: string) => {
+    setOpenAttendanceForms(prev => ({ ...prev, [formName]: !prev[formName] }));
+  };
+
+  const getTotalPresent = () => {
+    return Object.values(attendanceByForm).reduce((sum, classes) => 
+      sum + classes.reduce((classSum, c) => classSum + c.present.length, 0), 0
+    );
+  };
+
+  const getTotalAbsent = () => {
+    return Object.values(attendanceByForm).reduce((sum, classes) => 
+      sum + classes.reduce((classSum, c) => classSum + c.absent.length, 0), 0
+    );
+  };
 
   return (
     <>
@@ -212,13 +260,109 @@ const Index = ({ onLogout }: IndexProps) => {
             icon={Award}
             trend="↑ 5% improvement"
           />
-          <StatsCard
-            title="Attendance Rate"
-            value="94.2%"
-            subtitle="This month"
-            icon={TrendingUp}
-            trend="↑ 2.3% from last month"
-          />
+          <Collapsible open={openAttendance} onOpenChange={setOpenAttendance} className="md:col-span-2 lg:col-span-1">
+            <Card className="glass-card shadow-elegant hover-lift border-border/50">
+              <CardContent className="p-6">
+                <CollapsibleTrigger className="w-full">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1 text-left">
+                      <p className="text-sm font-medium text-muted-foreground mb-1">Attendance Rate</p>
+                      <h3 className="text-3xl font-bold text-foreground mb-1">94.2%</h3>
+                      <p className="text-xs text-muted-foreground">This month</p>
+                      <p className="text-xs font-medium text-secondary mt-2">↑ 2.3% from last month</p>
+                    </div>
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-accent shadow-glow animate-float">
+                        <TrendingUp className="h-6 w-6 text-accent-foreground" />
+                      </div>
+                      <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${openAttendance ? 'rotate-180' : ''}`} />
+                    </div>
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="mt-4 pt-4 border-t border-border/50 space-y-2">
+                    <div className="flex justify-between text-sm mb-3">
+                      <span className="flex items-center gap-2 text-green-600">
+                        <UserCheck className="h-4 w-4" /> Present: {getTotalPresent()}
+                      </span>
+                      <span className="flex items-center gap-2 text-red-500">
+                        <UserX className="h-4 w-4" /> Absent: {getTotalAbsent()}
+                      </span>
+                    </div>
+                    {Object.entries(attendanceByForm).map(([formName, classes]) => (
+                      <Collapsible 
+                        key={formName}
+                        open={openAttendanceForms[formName]}
+                        onOpenChange={() => toggleAttendanceForm(formName)}
+                      >
+                        <div className="rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors overflow-hidden">
+                          <CollapsibleTrigger className="w-full p-3 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-2 h-2 rounded-full ${formData.find(f => f.form === formName)?.color || 'bg-gray-500'}`} />
+                              <span className="text-sm font-medium text-foreground">{formName}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Badge variant="outline" className="text-xs bg-green-500/10 text-green-600 border-green-500/30">
+                                {classes.reduce((sum, c) => sum + c.present.length, 0)} present
+                              </Badge>
+                              <Badge variant="outline" className="text-xs bg-red-500/10 text-red-500 border-red-500/30">
+                                {classes.reduce((sum, c) => sum + c.absent.length, 0)} absent
+                              </Badge>
+                              <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${openAttendanceForms[formName] ? 'rotate-180' : ''}`} />
+                            </div>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent>
+                            <div className="px-3 pb-3 space-y-3">
+                              {classes.map((classData, idx) => (
+                                <div key={idx} className="rounded-md bg-background/50 p-3 space-y-2">
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-sm font-semibold text-foreground">
+                                      Class {classData.class} - {classData.subject}
+                                    </span>
+                                  </div>
+                                  {classData.present.length > 0 && (
+                                    <div className="space-y-1">
+                                      <p className="text-xs font-medium text-green-600 flex items-center gap-1">
+                                        <UserCheck className="h-3 w-3" /> Present ({classData.present.length})
+                                      </p>
+                                      <div className="flex flex-wrap gap-1">
+                                        {classData.present.map((name, i) => (
+                                          <Badge key={i} variant="secondary" className="text-xs bg-green-500/10 text-green-700 border-green-500/20">
+                                            {name}
+                                          </Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {classData.absent.length > 0 && (
+                                    <div className="space-y-1">
+                                      <p className="text-xs font-medium text-red-500 flex items-center gap-1">
+                                        <UserX className="h-3 w-3" /> Absent ({classData.absent.length})
+                                      </p>
+                                      <div className="flex flex-wrap gap-1">
+                                        {classData.absent.map((name, i) => (
+                                          <Badge key={i} variant="secondary" className="text-xs bg-red-500/10 text-red-600 border-red-500/20">
+                                            {name}
+                                          </Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {classData.absent.length === 0 && (
+                                    <p className="text-xs text-green-600 italic">All students present</p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </CollapsibleContent>
+                        </div>
+                      </Collapsible>
+                    ))}
+                  </div>
+                </CollapsibleContent>
+              </CardContent>
+            </Card>
+          </Collapsible>
         </div>
 
         {/* Quick Actions and Recent Activity */}
